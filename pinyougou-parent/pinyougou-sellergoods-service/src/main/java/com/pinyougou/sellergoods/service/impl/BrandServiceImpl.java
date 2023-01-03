@@ -21,6 +21,10 @@ public class BrandServiceImpl implements BrandService {
 
     @Autowired
     private BrandMapper brandMapper;
+	
+	@Autowired
+    private SpecificationMapper specificationMapper;
+	
 
     @Override
     public PageInfo<Brand> list(Integer pageNum, Integer pageSize, Brand brand) {
@@ -28,6 +32,7 @@ public class BrandServiceImpl implements BrandService {
         PageHelper.startPage(pageNum,pageSize);
         List<Brand> list = brandMapper.list(brand);
         PageInfo<Brand> pageInfo = new PageInfo<Brand>(list);
+		
 
         return pageInfo;
     }
