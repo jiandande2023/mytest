@@ -31,6 +31,7 @@ public class BrandController {
     public PageInfo<Brand> list(@RequestParam(value = "pageNum",required = false,defaultValue = "1")Integer pageNum,
                                 @RequestParam(value = "pageSize",required = false,defaultValue = "3") Integer pageSize,@RequestBody Brand brand){
         PageInfo<Brand> pageInfo = brandService.list(pageNum,pageSize,brand);
+		Sysetem.out.println("测试Git的使用");
         return pageInfo;
     }
 
