@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--dubbo配置-->
+    <!--注册一个应用-->
+    <dubbo:application name="pinyougou-sellergoods-service"/>
+
+    <!--
+       对外提供服务暴露的端口
+       port：其他应用调用该服务的端口号
+       name：其他应用调用该服务所使用的协议
+       host：该服务的访问地址
+     -->
+    <dubbo:protocol port="20881" name="dubbo"/>
+
+    <!--注册中心-->
+    <dubbo:registry address="zookeeper://192.168.211.128:2181"/>
+
+    <!--
+        包扫描，暴露接口服务
+        基于注解方式实现 com.alibaba.dubbo.config.annotation.@Service写到Service层的实现类上即可
+
+        扫描com.alibaba.dubbo.config.annotation.@Service会创建该对象的实例，同时将提供的接口服务信息注册到Dubbo注册中心中
+        会将实例对象交给SpringIOC容器
+    -->
+    <dubbo:annotation package="com.pinyougou.sellergoods.service.impl" />
+
+</beans>

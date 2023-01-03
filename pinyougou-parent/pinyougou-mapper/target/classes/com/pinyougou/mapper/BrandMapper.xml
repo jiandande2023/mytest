@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pinyougou.mapper.BrandMapper" >
+    <delete id="deleteBrand">
+        DELETE FROM tb_brand WHERE id IN
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <resultMap id="brandMap" type="com.pinyougou.model.Brand">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="first_char" property="firstChar"></result>
+    </resultMap>
+    <select id="list" parameterType="com.pinyougou.model.Brand" resultMap="brandMap">
+        SELECT * FROM tb_brand
+        <where>
+            <if test="name!=null and name !=''" >
+                and name LIKE  concat(concat('%', #{name,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="firstChar!=null and firstChar!=''">
+                and first_char = #{firstChar}
+            </if>
+        </where>
+    </select>
+</mapper>
