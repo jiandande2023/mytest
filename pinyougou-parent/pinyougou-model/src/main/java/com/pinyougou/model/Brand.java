@@ -30,6 +30,7 @@ public class Brand implements Serializable {
      */
     public Long getId() {
 		System.out.pritln("你好");
+		System.out.pritln("你好1");
         return id;
     }
 
